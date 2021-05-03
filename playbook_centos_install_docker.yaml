@@ -3,6 +3,8 @@
   gather_facts: No
   hosts: default
   become: true
+  vars:
+    - user: "celery"
 
   tasks:
     - name: Install yum utils
@@ -55,9 +57,9 @@
         enabled: yes
       become: yes
 
-    - name: Add user vagrant to docker group
+    - name: Add user celery to docker group
       user:
-        name: vagrant
+        name: {{user}}
         groups: docker
         append: yes
       become: yes

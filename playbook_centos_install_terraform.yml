@@ -1,21 +1,37 @@
 ---
 - name: Deploy Terraform
   hosts: default
+  remote_user: centos
+  become_method: sudo
   gather_facts: No
   become: true
+  vars:
+    - arch: "amd64"
+    - terraform_version: "0.15.1"
   roles:
     - { role: terraform }
 
   tasks:
+    - name: Install pip on the servers
+      yum:
+        name: python-pip
+        state: latest
+        update_cache: true
+      become: true
+
+    - name: Install pip3 on the servers
+      yum:
+        name: python3-pip
+        state: latest
+      become: true
+
     - name: Download Terraform
-      get_url: url="https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
-               dest="/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
-               checksum="sha256:{{ item.split(' ') | first }}"
-      with_items: "{{ terraform_checksums.content.split('\n') | select('search', 'linux_amd64') | list | first }}"
+      get_url: url="https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_{{arch}}.zip"
+               dest="/usr/local/src/terraform_{{ terraform_version }}_linux_linux_{{arch}}.zip"
       register: terraform_downloaded
 
     - name: Extract and install Terraform
-      unarchive: src="/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
+      unarchive: src="/usr/local/src/terraform_{{ terraform_version }}_linux_{{arch}}.zip"
                  dest=/usr/local/bin
                  copy=no
       when: current_terraform_version.rc != 0 or terraform_downloaded | changed
