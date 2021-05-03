@@ -6,6 +6,8 @@
     - celery_virtualenv_path: ""
     - celery_repo_path: ""
     - celery_user_name: ""
+    - celery_user_uid: ""
+    - celery_user_gid: ""
 
   tasks:
     - name: Install prerequistite packages
@@ -41,13 +43,7 @@
 
     - name: Install package in virtualenv
       pip:
-        # Install from requirements if it exists, otherwise install the repo path
-        requirements:
-          "{{ req_result.stat.exists | ternary(req_result.stat.path, omit) }}"
-        name:
-          "{{ req_result.stat.exists | ternary(omit, celery_repo_path) }}"
-        chdir: {{ celery_repo_path }}
-        state: forcereinstall
+        requirements: "requirements.txt"
         virtualenv: {{ celery_virtualenv_path }}
         virtualenv_command: "python3 -m venv"
       become: true
@@ -68,28 +64,14 @@
 
     - name: Set facts about Celery daemon user / group
       set_fact:
-        celery_user_uid: {{ user_result.uid }}
-        celery_user_gid: {{ user_result.group }}
+        celery_user_uid: {{ celery_user_uid }}
+        celery_user_gid: {{ celery_user_gid }}
 
     - name: Install Celery service
-      template:
-        src: "celery.service.j2"
-        dest: "/etc/systemd/system/celery.service"
-        owner: root
-        group: root
-        mode: 0644
-      become: true
-      become_user: root
-      notify: Restart Celery
-
-    - name: Deploy Celery environment config file
-      template:
-        src: "celery.conf.j2"
-        dest: {{ celery_environment_file_path }}
-        owner: root
-        group: root
-        # This file contains secrets, so only root (systemd) can read it
-        mode: 0600
+      dest: "/etc/systemd/system/celery.service"
+      owner: root
+      group: root
+      mode: 0644
       become: true
       become_user: root
       notify: Restart Celery
