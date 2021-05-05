@@ -1,0 +1,6 @@
+---
+# defaults file for terraform-role
+terraform_version: 0.12.7
+terraform_dir: /opt/terraform
+terraform_user: terraform
+terraform_user_password: 12345

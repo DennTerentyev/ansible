@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: celery
+  author: sweet_home
+  description: Install a Celery worker.
+  company: Sweet Home, Inc.
+  license: Apache
+  min_ansible_version: 2.7
+  platforms:
+    - name: Centos
+      versions:
+        - focal
+
+  galaxy_tags:
+    - celery
