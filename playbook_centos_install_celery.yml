@@ -5,7 +5,7 @@
   vars:
     - celery_virtualenv_path: ""
     - celery_repo_path: ""
-    - celery_user_name: ""
+    - celery_user_name: "celery"
     - celery_user_uid: ""
     - celery_user_gid: ""
 
@@ -48,7 +48,6 @@
         virtualenv_command: "python3 -m venv"
       become: true
       become_user: root
-      when: git_result.changed
       notify: Restart Celery
 
     - name: Create Celery daemon user / group

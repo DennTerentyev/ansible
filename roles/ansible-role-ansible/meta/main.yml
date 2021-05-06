@@ -1,0 +1,23 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: sweet_home
+  description: Ansible for RedHat/CentOS.
+  company: Sweet Home, Inc.
+  license: Apache
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+  galaxy_tags:
+    - system
+    - packaging
+    - development
+    - cloud
+    - ansible
+    - automation
