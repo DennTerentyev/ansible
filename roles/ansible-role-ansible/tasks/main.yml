@@ -17,6 +17,18 @@
     - ansible_distribution == 'Fedora'
     - ansible_install_method == 'package'
 
+- name: Set up Ansible on Ubuntu.
+  include_tasks: setup-Ubuntu.yml
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_install_method == 'package'
+
+- name: Set up Ansible on Debian.
+  include_tasks: setup-Debian.yml
+  when:
+    - ansible_distribution == 'Debian'
+    - ansible_install_method == 'package'
+
 - name: Set up Ansible using Pip.
   include_tasks: setup-pip.yml
   when: ansible_install_method == 'pip'

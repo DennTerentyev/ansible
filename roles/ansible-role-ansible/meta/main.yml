@@ -2,16 +2,22 @@
 dependencies: []
 
 galaxy_info:
-  author: sweet_home
-  description: Ansible for RedHat/CentOS.
-  company: Sweet Home, Inc.
-  license: Apache
+  author: geerlingguy
+  description: Ansible for RedHat/CentOS/Debian/Ubuntu.
+  company: "Midwestern Mac, LLC"
+  license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:
     - name: EL
       versions:
         - all
     - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
       versions:
         - all
   galaxy_tags:

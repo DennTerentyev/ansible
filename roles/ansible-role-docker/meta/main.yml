@@ -3,10 +3,10 @@ dependencies: []
 
 galaxy_info:
   role_name: docker
-  author: sweetHome
+  author: geerlingguy
   description: Docker for Linux.
-  company: Sweet Home, Inc.
-  license: Apache
+  company: "Midwestern Mac, LLC"
+  license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:
     - name: EL
@@ -16,6 +16,15 @@ galaxy_info:
     - name: Fedora
       versions:
         - all
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - focal
   galaxy_tags:
     - web
     - system

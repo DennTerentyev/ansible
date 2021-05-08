@@ -1,3 +1,16 @@
 ---
-celery_environment: {}
-celery_repository_ref: HEAD
+
+celery_user:  nobody
+celery_group: nogroup
+
+celery_pkg_deps:
+  - python
+  - python-dev
+  - python-pip
+
+# Celery version
+celery_version: 5.0.5
+
+celery_flower_enabled: true
+
+# vi:ts=2:sw=2:et:ft=yaml

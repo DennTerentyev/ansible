@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  tasks:
+       
+  roles:
+    - {
+        role: ansible-role-celery,
+        celery_flower_enabled: true,
+      }
+
+# vi:ts=2:sw=2:et:ft=yaml
