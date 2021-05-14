@@ -1,0 +1,6 @@
+___
+- name: Install ansible role from Ansible Galaxy
+  hosts: all
+  become: true
+  roles:
+   - geerlingguy.ansible
